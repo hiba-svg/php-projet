@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Bancaire - Accès Sécurisé</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="login-container">
+        
+        <div class="view active-view" id="loginView">
+            <header class="login-header">
+                <h1>Bienvenue</h1>
+                <p>Connectez-vous à votre espace bancaire sécurisé.</p>
+            </header>
+
+            <div class="role-selector">
+                <button class="role-button active" id="client-btn">Client</button>
+                <button class="role-button" id="admin-btn">Admin</button>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <label for="account-id" id="id-label">Numéro de Compte ou Email</label>
+                <input type="text" id="account-id" name="account-id" placeholder="Ex: 123456789 ou mon.email@domaine.com" required>
+
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+
+                <div class="two-factor-auth" id="twoFactorSection">
+                    <p>Authentification à Deux Facteurs (2FA) Requise.</p>
+                    <label for="2fa-code">Code de Sécurité (SMS/Email)</label>
+                    <input type="text" id="2fa-code" name="2fa-code" placeholder="Entrez le code à 6 chiffres" maxlength="6">
+                </div>
+
+                <button type="submit" id="submit-btn" class="submit-btn">Se Connecter</button>
+
+                <div class="form-links">
+                    <a href="#" class="forgot-password" data-view="forgotPasswordView">Mot de passe oublié ?</a>
+                    <a href="#" class="signup-link" id="signup-link" data-view="registerView">S'inscrire (Client)</a>
+                </div>
+            </form>
+        </div>
+        
+        <div class="view" id="forgotPasswordView">
+            <header class="login-header">
+                <h1>Réinitialiser votre Mot de passe</h1>
+                <p>Entrez votre identifiant pour recevoir un code de vérification.</p>
+            </header>
+
+            <form class="recovery-form" id="recoveryForm">
+                <label for="recovery-id">Email ou Numéro de Compte</label>
+                <input type="text" id="recovery-id" name="recovery-id" placeholder="Ex: mon.email@domaine.com" required>
+                
+                <p class="small-text">Le code sera envoyé par email ou SMS au numéro/email associé à ce compte.</p>
+
+                <button type="submit" class="submit-btn">Envoyer le Code de Récupération</button>
+                
+                <div class="form-links">
+                    <a href="#" class="back-to-login" data-view="loginView">&larr; Retour à la Connexion</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="view" id="registerView">
+            <header class="login-header">
+                <h1>Créer un Compte Client</h1>
+                <p>Rejoignez la banque en remplissant les informations de base.</p>
+            </header>
+
+            <form class="register-form" id="registerForm">
+                <label for="reg-full-name">Nom Complet</label>
+                <input type="text" id="reg-full-name" name="reg-full-name" placeholder="Nom et Prénom" required>
+
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" name="reg-email" placeholder="Adresse email valide" required>
+                
+                <label for="reg-password">Mot de passe (8+ caractères)</label>
+                <input type="password" id="reg-password" name="reg-password" placeholder="Mot de passe sécurisé" required minlength="8">
+                
+                <label for="reg-confirm-password">Confirmer Mot de passe</label>
+                <input type="password" id="reg-confirm-password" name="reg-confirm-password" placeholder="Retapez le mot de passe" required>
+
+                <button type="submit" class="submit-btn">S'inscrire et Ouvrir un Compte</button>
+                
+                <div class="form-links">
+                    <a href="#" class="back-to-login" data-view="loginView">&larr; J'ai déjà un compte</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
