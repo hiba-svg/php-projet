@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Transactions - BankPro Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root { /* Styles de base admin réutilisés */ --color-orange-cuivre: #d95b00; --color-noir-profond: #121212; --color-gris-fonce: #202020; --color-blanc-pur: #ffffff; --color-gris-moyen: #999; --color-rouge-alerte: #dc3545; --color-vert-succes: #28a745; --color-bleu-btn: #3498db; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #1a1a1a; color: var(--color-blanc-pur); margin: 0; padding: 0; }
+        .sidebar { width: 250px; background-color: var(--color-gris-fonce); height: 100vh; position: fixed; padding-top: 20px; }
+        .sidebar h2 { color: var(--color-orange-cuivre); text-align: center; margin-bottom: 30px; }
+        .sidebar-nav a { display: block; padding: 15px 20px; color: var(--color-gris-moyen); text-decoration: none; transition: background-color 0.3s, color 0.3s; }
+        .sidebar-nav a:hover, .sidebar-nav a.active { background-color: #333; color: var(--color-orange-cuivre); }
+        .sidebar-nav i { margin-right: 10px; }
+        .main-content { margin-left: 250px; padding: 40px; }
+        
+        /* Styles spécifiques au tableau */
+        .table-controls { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .admin-table { width: 100%; border-collapse: collapse; background-color: var(--color-gris-fonce); border-radius: 8px; overflow: hidden; }
+        .admin-table th, .admin-table td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
+        .admin-table th { background-color: #1a1a1a; color: var(--color-gris-moyen); }
+        .btn-action { background-color: var(--color-vert-succes); color: var(--color-blanc-pur); border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px; }
+        .btn-cancel { background-color: var(--color-rouge-alerte); }
+        .btn-litige { background-color: var(--color-orange-cuivre); }
+        .filters input, .filters select { padding: 8px; background-color: #333; border: 1px solid #444; border-radius: 5px; color: var(--color-blanc-pur); margin-right: 10px; }
+        .status-litige { color: var(--color-orange-cuivre); font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>BankPro Admin</h2>
+        <nav class="sidebar-nav">
+            <a href="admin_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="admin_users.html"><i class="fas fa-users"></i> Gestion Utilisateurs</a>
+            <a href="admin_accounts.html"><i class="fas fa-university"></i> Gestion Comptes</a>
+            <a href="admin_transactions.html" class="active"><i class="fas fa-exchange-alt"></i> Gestion Transactions</a>
+            <a href="admin_reports.html"><i class="fas fa-chart-line"></i> Rapports & Stats</a>
+            <a href="login.html" style="color: var(--color-rouge-alerte); margin-top: 30px;"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1><i class="fas fa-exchange-alt"></i> Gestion des Transactions</h1>
+
+        <div class="table-controls">
+            <div class="filters">
+                <input type="date" style="margin-right: 5px;"> à <input type="date">
+                <select><option>Tous les Statuts</option><option>En Cours</option><option>Validé</option><option>Litige</option></select>
+                <select><option>Tous les Types</option><option>Virement</option><option>Prélèvement</option></select>
+            </div>
+            <button class="btn-litige"><i class="fas fa-search"></i> Rechercher</button>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID Trans.</th>
+                    <th>Date</th>
+                    <th>Client</th>
+                    <th>Type</th>
+                    <th>Montant</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>TRX-00123</td>
+                    <td>16/12/2025</td>
+                    <td>Client BankPro</td>
+                    <td>Virement SEPA</td>
+                    <td>1 200,00 €</td>
+                    <td><span style="color: var(--color-vert-succes);">Validé</span></td>
+                    <td>
+                        <button class="btn-action btn-cancel"><i class="fas fa-undo"></i> Annuler</button>
+                        <button class="btn-action btn-litige"><i class="fas fa-gavel"></i> Litige</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TRX-00124</td>
+                    <td>15/12/2025</td>
+                    <td>Jean Dupont</td>
+                    <td>Achat Carte</td>
+                    <td>- 45,90 €</td>
+                    <td class="status-litige">Litige</td>
+                    <td>
+                        <button class="btn-action"><i class="fas fa-check"></i> Valider</button>
+                        <button class="btn-action btn-litige"><i class="fas fa-gavel"></i> Voir Détails</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

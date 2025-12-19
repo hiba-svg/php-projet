@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Comptes Clients - BankPro Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root { /* Styles de base admin réutilisés */ --color-orange-cuivre: #d95b00; --color-noir-profond: #121212; --color-gris-fonce: #202020; --color-blanc-pur: #ffffff; --color-gris-moyen: #999; --color-rouge-alerte: #dc3545; --color-vert-succes: #28a745; --color-bleu-btn: #3498db; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #1a1a1a; color: var(--color-blanc-pur); margin: 0; padding: 0; }
+        .sidebar { width: 250px; background-color: var(--color-gris-fonce); height: 100vh; position: fixed; padding-top: 20px; }
+        .sidebar h2 { color: var(--color-orange-cuivre); text-align: center; margin-bottom: 30px; }
+        .sidebar-nav a { display: block; padding: 15px 20px; color: var(--color-gris-moyen); text-decoration: none; transition: background-color 0.3s, color 0.3s; }
+        .sidebar-nav a:hover, .sidebar-nav a.active { background-color: #333; color: var(--color-orange-cuivre); }
+        .sidebar-nav i { margin-right: 10px; }
+        .main-content { margin-left: 250px; padding: 40px; }
+        
+        /* Styles spécifiques au tableau */
+        .table-controls { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .btn-validate { background-color: var(--color-vert-succes); color: var(--color-blanc-pur); border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .admin-table { width: 100%; border-collapse: collapse; background-color: var(--color-gris-fonce); border-radius: 8px; overflow: hidden; }
+        .admin-table th, .admin-table td { padding: 15px; text-align: left; border-bottom: 1px solid #333; }
+        .admin-table th { background-color: #1a1a1a; color: var(--color-gris-moyen); }
+        .btn-action { background-color: var(--color-bleu-btn); color: var(--color-blanc-pur); border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; margin-right: 5px; }
+        .btn-block { background-color: var(--color-rouge-alerte); }
+        .filters input, .filters select { padding: 8px; background-color: #333; border: 1px solid #444; border-radius: 5px; color: var(--color-blanc-pur); margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>BankPro Admin</h2>
+        <nav class="sidebar-nav">
+            <a href="admin_dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="admin_users.html"><i class="fas fa-users"></i> Gestion Utilisateurs</a>
+            <a href="admin_accounts.html" class="active"><i class="fas fa-university"></i> Gestion Comptes</a>
+            <a href="admin_transactions.html"><i class="fas fa-exchange-alt"></i> Gestion Transactions</a>
+            <a href="admin_reports.html"><i class="fas fa-chart-line"></i> Rapports & Stats</a>
+            <a href="login.html" style="color: var(--color-rouge-alerte); margin-top: 30px;"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <h1><i class="fas fa-university"></i> Gestion des Comptes Clients</h1>
+
+        <div class="table-controls">
+            <div class="filters">
+                <input type="text" placeholder="Rechercher par Nom/Compte">
+                <select><option>Tous les Statuts</option><option>Actif</option><option>En Attente</option><option>Bloqué</option></select>
+                <select><option>Tous les Types</option><option>Courant</option><option>Épargne</option></select>
+            </div>
+            <button class="btn-validate"><i class="fas fa-check-circle"></i> Valider les Nouveaux Comptes (2)</button>
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Compte #</th>
+                    <th>Titulaire</th>
+                    <th>Type</th>
+                    <th>Solde</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>FR1234567890</td>
+                    <td>Client BankPro</td>
+                    <td>Courant</td>
+                    <td>4 550,50 €</td>
+                    <td><span style="color: var(--color-vert-succes);">Actif</span></td>
+                    <td>
+                        <button class="btn-action"><i class="fas fa-eye"></i> Voir Historique</button>
+                        <button class="btn-action btn-block"><i class="fas fa-lock"></i> Bloquer</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>FR0987654321</td>
+                    <td>Jean Dupont</td>
+                    <td>Épargne</td>
+                    <td>12 890,00 €</td>
+                    <td><span style="color: var(--color-orange-cuivre);">En Attente</span></td>
+                    <td>
+                        <button class="btn-validate"><i class="fas fa-check"></i> Valider</button>
+                        <button class="btn-action btn-block"><i class="fas fa-times"></i> Annuler</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
