@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Comptes - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS COHÉRENT POUR L'INTERFACE (Reprise des couleurs principales) */
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+            --color-bleu-btn: #3498db;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--color-noir-profond); 
+            color: var(--color-blanc-pur); 
+            margin: 0; 
+            padding: 0; 
+        }
+        /* Barre de navigation */
+        .navbar { 
+            background-color: var(--color-gris-fonce); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--color-orange-cuivre); 
+        }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 1200px; margin: 50px auto; padding: 30px; }
+        h2 { 
+            color: var(--color-orange-cuivre); 
+            border-bottom: 2px solid var(--color-gris-fonce); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+        }
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 0 10px; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-orange-cuivre); }
+
+        /* --- STYLES SPÉCIFIQUES AUX COMPTES --- */
+        .account-selector {
+            background-color: var(--color-gris-fonce);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .account-selector label, .account-selector select {
+            color: var(--color-blanc-pur);
+        }
+        .account-selector select {
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+            font-size: 1em;
+            margin-left: 10px;
+            min-width: 300px;
+        }
+        
+        /* --- BLOC DÉTAILS DU COMPTE --- */
+        .account-details {
+            display: flex;
+            justify-content: space-between;
+            background-color: var(--color-gris-fonce);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .detail-box {
+            padding: 15px;
+            flex-basis: 30%;
+            border-right: 1px solid #333;
+        }
+        .detail-box:last-child {
+            border-right: none;
+        }
+        .detail-box p {
+            margin: 0;
+            color: var(--color-gris-moyen);
+            font-size: 0.9em;
+        }
+        .detail-box strong {
+            display: block;
+            font-size: 1.5em;
+            color: var(--color-blanc-pur);
+            margin-top: 5px;
+        }
+        .solde-positif { color: var(--color-vert-succes); }
+        .solde-negatif { color: var(--color-rouge-alerte); }
+
+        /* --- BOUTONS D'ACTION --- */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: flex-end;
+        }
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            color: var(--color-blanc-pur);
+        }
+        .btn-virement {
+            background-color: var(--color-orange-cuivre);
+        }
+        .btn-virement:hover {
+            background-color: #cc5400;
+        }
+        .btn-telecharger {
+            background-color: var(--color-bleu-btn); 
+        }
+        .btn-telecharger:hover {
+            background-color: #2980b9;
+        }
+        .action-btn i {
+            margin-right: 8px;
+        }
+
+        /* --- TABLEAU DE RELEVÉ (Même style que l'historique) --- */
+        .releve-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .releve-table th, .releve-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        .releve-table th {
+            color: var(--color-gris-moyen);
+            border-bottom: 2px solid var(--color-gris-fonce);
+            background-color: #1a1a1a;
+        }
+        .releve-table td {
+            font-size: 0.95em;
+        }
+        .amount.debit { color: var(--color-rouge-alerte); font-weight: bold; }
+        .amount.credit { color: var(--color-vert-succes); font-weight: bold; }
+        
+        /* Filtres du relevé */
+        .releve-filters {
+            background-color: #1a1a1a;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .releve-filters input[type="date"], .releve-filters select {
+            padding: 8px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+        <nav class="main-nav">
+            <a href="dashboard.html" class="nav-link ">Accueil</a>
+            <a href="comptes.html" class="nav-link active">Comptes</a>
+            <a href="transaction.html" class="nav-link">Transactions</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="profil.html" class="nav-link">Profil</a>
+    </nav>
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-university"></i> Gestion & Détails des Comptes</h2>
+
+        <div class="account-selector">
+            <label for="compte-select">Sélectionner le compte à consulter :</label>
+            <select id="compte-select">
+                <option>Compte Courant Principal (4 550,50 €)</option>
+                <option>Compte Épargne Livret A (12 890,00 €)</option>
+                <option>Compte Titres (25 120,00 €)</option>
+            </select>
+        </div>
+
+        <h3>Détails du Compte Courant Principal</h3>
+        <div class="account-details">
+            <div class="detail-box">
+                <p>Numéro de Compte</p>
+                <strong>FR76 XXXX 1234 5678 90</strong>
+            </div>
+            <div class="detail-box">
+                <p>Solde Actuel</p>
+                <strong class="solde-positif">4 550,50 €</strong>
+            </div>
+            <div class="detail-box">
+                <p>Découvert Autorisé</p>
+                <strong>1 500,00 €</strong>
+            </div>
+            <div class="detail-box">
+                <p>Type de Compte</p>
+                <strong>Courant</strong>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="virement.html" class="action-btn btn-virement">
+                <i class="fas fa-exchange-alt"></i> Effectuer un Virement
+            </a>
+            <button class="action-btn btn-telecharger">
+                <i class="fas fa-download"></i> Télécharger le Relevé
+            </button>
+        </div>
+
+        <h3 style="margin-top: 50px;">Relevé de Compte Détaillé</h3>
+        
+        <div class="releve-filters">
+            <label style="color: var(--color-gris-moyen);">Filtrer du :</label>
+            <input type="date" value="2025-11-01">
+            <label style="color: var(--color-gris-moyen);">Au :</label>
+            <input type="date" value="2025-12-16">
+            <select>
+                <option>Toutes les Opérations</option>
+                <option>Crédit</option>
+                <option>Débit</option>
+            </select>
+            <button class="action-btn btn-virement" style="padding: 8px 15px;"><i class="fas fa-filter"></i> Filtrer</button>
+            <button class="action-btn btn-telecharger" style="padding: 8px 15px;"><i class="fas fa-file-pdf"></i> Export PDF</button>
+        </div>
+
+        <table class="releve-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Libellé / Description</th>
+                    <th>Montant (€)</th>
+                    <th>Type</th>
+                    <th>Solde après Opération</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>15/12/2025</td>
+                    <td>Paiement par Carte: Supermarché</td>
+                    <td class="amount debit">- 45,90</td>
+                    <td>Débit</td>
+                    <td>4 550,50</td>
+                </tr>
+                <tr>
+                    <td>15/12/2025</td>
+                    <td>Virement Reçu: Salaire Décembre</td>
+                    <td class="amount credit">+ 2 500,00</td>
+                    <td>Crédit</td>
+                    <td>4 596,40</td>
+                </tr>
+                <tr>
+                    <td>14/12/2025</td>
+                    <td>Prélèvement Automatique: Abonnement Netflix</td>
+                    <td class="amount debit">- 12,99</td>
+                    <td>Débit</td>
+                    <td>2 096,40</td>
+                </tr>
+                <tr>
+                    <td>01/12/2025</td>
+                    <td>Loyer (Virement émis)</td>
+                    <td class="amount debit">- 850,00</td>
+                    <td>Débit</td>
+                    <td>2 109,39</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des Achats & Transactions - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Réutilisation des styles de base de style.css et historique.html */
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+            --color-bleu-btn: #3498db;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--color-noir-profond); 
+            color: var(--color-blanc-pur); 
+            margin: 0; 
+            padding: 0; 
+        }
+        .navbar { 
+            background-color: var(--color-gris-fonce); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--color-orange-cuivre); 
+        }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 1200px; margin: 50px auto; padding: 30px; }
+        h2 { 
+            color: var(--color-orange-cuivre); 
+            border-bottom: 2px solid var(--color-gris-fonce); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+        }
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 10px 15px; transition: color 0.3s; border-radius: 5px; }
+        .nav-link:hover, .nav-link.active { color: var(--color-orange-cuivre); background-color: #2b2b2b; }
+        
+        /* Styles spécifiques pour le tableau et les filtres */
+        .filter-bar {
+            background-color: var(--color-gris-fonce);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .filter-bar input, .filter-bar select {
+            padding: 8px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+        }
+        .search-btn {
+            background-color: var(--color-orange-cuivre);
+            color: var(--color-blanc-pur);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .transaction-table th, .transaction-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        .transaction-table th {
+            color: var(--color-gris-moyen);
+            border-bottom: 2px solid var(--color-gris-fonce);
+            background-color: #1a1a1a;
+        }
+        .amount.debit { color: var(--color-rouge-alerte); font-weight: bold; }
+
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+        
+            <nav class="main-nav">
+                <a href="dashboard.html" class="nav-link ">Accueil</a>
+                <a href="comptes.html" class="nav-link">Comptes</a>
+                <a href="transaction.html" class="nav-link active">Transactions</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="profil.html" class="nav-link">Profil</a>
+            </nav>
+        
+        <div class="user-info">
+            <span class="notification-icon" id="notification-btn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="unread-count">2</span> 
+            </span>
+        </div>
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-shopping-cart"></i> Historique des Achats & Transactions (Cartes)</h2>
+
+        <div class="filter-bar">
+            <label style="color: var(--color-gris-moyen);">Période :</label>
+            <input type="date" value="2025-11-01">
+            <input type="date" value="2025-12-16">
+            
+            <label style="color: var(--color-gris-moyen);">Carte :</label>
+            <select>
+                <option>Toutes les cartes</option>
+                <option>Visa Standard (***1234)</option>
+                <option>MasterCard Premium (***5678)</option>
+            </select>
+            
+            <input type="text" placeholder="Rechercher Commerçant ou Montant">
+            
+            <button class="search-btn"><i class="fas fa-search"></i> Filtrer</button>
+            <button class="search-btn" style="background-color: var(--color-bleu-btn);"><i class="fas fa-file-export"></i> Export</button>
+        </div>
+
+        <table class="transaction-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Commerçant / Site</th>
+                    <th>Montant</th>
+                    <th>Carte Utilisée</th>
+                    <th>Type</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>16/12/2025</td>
+                    <td>Amazon France (Achat en ligne)</td>
+                    <td class="amount debit">- 89,99 €</td>
+                    <td>Visa Standard (***1234)</td>
+                    <td>E-commerce</td>
+                    <td style="color: var(--color-vert-succes);">Terminé</td>
+                </tr>
+                <tr>
+                    <td>15/12/2025</td>
+                    <td>Restaurant 'Le Bon Goût'</td>
+                    <td class="amount debit">- 35,00 €</td>
+                    <td>MasterCard Premium (***5678)</td>
+                    <td>Terminal de Paiement</td>
+                    <td style="color: var(--color-vert-succes);">Terminé</td>
+                </tr>
+                <tr>
+                    <td>14/12/2025</td>
+                    <td>Retrait Distributeur (Paris)</td>
+                    <td class="amount debit">- 200,00 €</td>
+                    <td>Visa Standard (***1234)</td>
+                    <td>Retrait ATM</td>
+                    <td style="color: var(--color-vert-succes);">Terminé</td>
+                </tr>
+                <tr>
+                    <td>10/12/2025</td>
+                    <td>Pré-autorisation Hotel Riviera</td>
+                    <td class="amount debit">- 500,00 €</td>
+                    <td>MasterCard Premium (***5678)</td>
+                    <td>Hébergement</td>
+                    <td style="color: var(--color-orange-cuivre);">En attente</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virement - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Cohérent (basé sur le style.css) */
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--color-noir-profond); color: var(--color-blanc-pur); margin: 0; padding: 0; }
+        .navbar { background-color: var(--color-gris-fonce); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--color-orange-cuivre); }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 800px; margin: 50px auto; padding: 30px; }
+        h2 { color: var(--color-orange-cuivre); border-bottom: 2px solid var(--color-gris-fonce); padding-bottom: 10px; margin-bottom: 30px; }
+        .form-container { background-color: var(--color-gris-fonce); padding: 30px; border-radius: 10px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--color-gris-moyen); font-weight: bold; }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .submit-btn {
+            background-color: var(--color-orange-cuivre);
+            color: var(--color-blanc-pur);
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            float: right;
+        }
+        .submit-btn:hover { background-color: #cc5400; }
+        /* Style des liens de navigation */
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 0 10px; }
+        .nav-link:hover { color: var(--color-orange-cuivre); }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="dashboard.html" class="nav-link"><h1 class="logo">BankPro</h1></a> 
+        
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-exchange-alt"></i> Nouveau Virement</h2>
+        
+        <div class="form-container">
+            <form>
+                <div class="form-group">
+                    <label for="compte-source">Compte Source (Débit)</label>
+                    <select id="compte-source">
+                        <option>Compte Courant Principal (5 450,50 €)</option>
+                        <option>Compte Réserve (12 890,00 €)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="destinataire">IBAN / Destinataire</label>
+                    <input type="text" id="destinataire" placeholder="Saisir l'IBAN ou sélectionner un bénéficiaire existant">
+                </div>
+                
+                <div class="form-group">
+                    <label for="montant">Montant (€)</label>
+                    <input type="number" id="montant" placeholder="0.00" min="0.01" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label for="reference">Motif / Référence</label>
+                    <input type="text" id="reference" placeholder="Ex: Loyer, Cadeau, Remboursement...">
+                </div>
+
+                <button type="submit" class="submit-btn">Confirmer le Virement</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toutes les Notifications - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+            --color-bleu-btn: #3498db;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--color-noir-profond); color: var(--color-blanc-pur); margin: 0; padding: 0; }
+        .navbar { background-color: var(--color-gris-fonce); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--color-orange-cuivre); }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 900px; margin: 50px auto; padding: 30px; }
+        h2 { color: var(--color-orange-cuivre); border-bottom: 2px solid var(--color-gris-fonce); padding-bottom: 10px; margin-bottom: 30px; }
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 10px 15px; transition: color 0.3s; border-radius: 5px; }
+        .nav-link:hover, .nav-link.active { color: var(--color-orange-cuivre); background-color: #2b2b2b; }
+        
+        /* Styles spécifiques */
+        .notification-list { list-style: none; padding: 0; }
+        .notification-item { 
+            background-color: var(--color-gris-fonce); 
+            margin-bottom: 15px; 
+            padding: 20px; 
+            border-radius: 8px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-left: 5px solid transparent;
+        }
+        .notification-item.unread { border-left-color: var(--color-orange-cuivre); }
+        .notification-item.alert { border-left-color: var(--color-rouge-alerte); }
+        .notification-item.info { border-left-color: var(--color-bleu-btn); }
+        
+        .notification-content { flex-grow: 1; }
+        .notification-content p { margin: 0; font-size: 1.1em; }
+        .notification-content small { display: block; color: var(--color-gris-moyen); margin-top: 5px; }
+        
+        .notification-actions button {
+            background: none;
+            border: 1px solid var(--color-gris-moyen);
+            color: var(--color-gris-moyen);
+            padding: 8px 12px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .notification-actions button:hover {
+            background-color: var(--color-orange-cuivre);
+            color: var(--color-blanc-pur);
+            border-color: var(--color-orange-cuivre);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+     
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-bell"></i> Toutes les Notifications</h2>
+        
+        <div style="margin-bottom: 20px; text-align: right;">
+            <button class="notification-actions-all" style="background-color: var(--color-vert-succes); color: var(--color-blanc-pur); padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer;"><i class="fas fa-check-double"></i> Tout Marquer comme Lu</button>
+        </div>
+
+        <ul class="notification-list">
+            <li class="notification-item unread alert">
+                <div class="notification-content">
+                    <p>ALERTE : Solde du Compte Courant est inférieur à 500,00 €.</p>
+                    <small><i class="fas fa-clock"></i> Il y a 5 minutes</small>
+                </div>
+                <div class="notification-actions">
+                    <button><i class="fas fa-check"></i> Marquer comme Lu</button>
+                </div>
+            </li>
+            <li class="notification-item unread info">
+                <div class="notification-content">
+                    <p>Confirmation : Virement de 1 200,00 € vers Jean Dupont effectué.</p>
+                    <small><i class="fas fa-clock"></i> 16/12/2025 à 10h15</small>
+                </div>
+                <div class="notification-actions">
+                    <button><i class="fas fa-check"></i> Marquer comme Lu</button>
+                </div>
+            </li>
+            <li class="notification-item">
+                <div class="notification-content">
+                    <p>Message Banque : Mise à jour de nos conditions générales de service.</p>
+                    <small><i class="fas fa-clock"></i> 14/12/2025</small>
+                </div>
+                <div class="notification-actions">
+                    <button><i class="fas fa-trash-alt"></i> Supprimer</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

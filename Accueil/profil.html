@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil & Sécurité - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+            --color-bleu-btn: #3498db;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--color-noir-profond); color: var(--color-blanc-pur); margin: 0; padding: 0; }
+        .navbar { background-color: var(--color-gris-fonce); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--color-orange-cuivre); }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 900px; margin: 50px auto; padding: 30px; }
+        h2 { color: var(--color-orange-cuivre); border-bottom: 2px solid var(--color-gris-fonce); padding-bottom: 10px; margin-bottom: 30px; }
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 10px 15px; transition: color 0.3s; border-radius: 5px; }
+        .nav-link:hover, .nav-link.active { color: var(--color-orange-cuivre); background-color: #2b2b2b; }
+        
+        /* Styles spécifiques */
+        .profile-grid { display: flex; gap: 30px; }
+        .profile-box { 
+            background-color: var(--color-gris-fonce); 
+            padding: 25px; 
+            border-radius: 8px; 
+            flex: 1;
+            margin-bottom: 30px;
+        }
+        .profile-box h3 { color: var(--color-blanc-pur); border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 0; }
+        .info-group { margin-bottom: 15px; }
+        .info-group label { display: block; color: var(--color-gris-moyen); font-weight: bold; margin-bottom: 5px; }
+        .info-group p, .info-group input { color: var(--color-blanc-pur); font-size: 1.1em; }
+        .info-group input[type="text"], .info-group input[type="password"] { 
+            width: 100%; padding: 10px; background-color: #2b2b2b; border: 1px solid #333; border-radius: 5px; box-sizing: border-box; 
+        }
+        .btn-save { 
+            background-color: var(--color-orange-cuivre); color: var(--color-blanc-pur); 
+            padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; 
+            font-weight: bold; transition: background-color 0.3s; margin-top: 10px;
+        }
+        .btn-save:hover { background-color: #cc5400; }
+        
+        .security-setting { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 0; 
+            border-bottom: 1px solid #333;
+        }
+        .status-badge { 
+            padding: 5px 10px; 
+            border-radius: 4px; 
+            font-weight: bold; 
+            font-size: 0.9em; 
+        }
+        .status-active { background-color: var(--color-vert-succes); }
+        .status-inactive { background-color: var(--color-rouge-alerte); }
+        .disconnect-btn { background-color: #333; color: var(--color-blanc-pur); border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+        <nav class="main-nav">
+            <a href="dashboard.html" class="nav-link">Accueil</a>
+            <a href="comptes.html" class="nav-link">Comptes</a>
+            <a href="transaction.html" class="nav-link">Transactions</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="profil.html" class="nav-link active">Profil</a>
+        </nav>
+        <div class="user-info"><span class="notification-icon" id="notification-btn"><i class="fas fa-bell"></i><span class="notification-badge" id="unread-count">2</span></span></div>
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-user-circle"></i> Profil & Sécurité</h2>
+
+        <div class="profile-grid">
+            <div class="profile-box">
+                <h3><i class="fas fa-info-circle"></i> Informations Personnelles</h3>
+                <form>
+                    <div class="info-group"><label>Nom & Prénom</label><input type="text" value="Client BankPro"></div>
+                    <div class="info-group"><label>Email</label><input type="text" value="client@bankpro.com"></div>
+                    <div class="info-group"><label>Téléphone</label><input type="text" value="+33 6 12 34 56 78"></div>
+                    <div class="info-group"><label>Adresse</label><input type="text" value="123 Rue de la Banque, 75000 Paris"></div>
+                    <button type="submit" class="btn-save">Enregistrer les Modifications</button>
+                </form>
+            </div>
+
+            <div class="profile-box">
+                <h3><i class="fas fa-lock"></i> Paramètres de Sécurité</h3>
+                
+                <div class="info-group">
+                    <label>Changer le Mot de Passe</label>
+                    <input type="password" placeholder="Ancien mot de passe">
+                    <input type="password" placeholder="Nouveau mot de passe" style="margin-top: 10px;">
+                    <button class="btn-save">Changer le Mot de Passe</button>
+                </div>
+
+                <div class="security-setting">
+                    <span>Authentification à deux facteurs (2FA)</span>
+                    <span class="status-badge status-active">Activée</span>
+                </div>
+                
+                <div class="security-setting">
+                    <span>Gestion des Appareils Autorisés</span>
+                    <button class="disconnect-btn"><i class="fas fa-times-circle"></i> Déconnecter tous les appareils</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

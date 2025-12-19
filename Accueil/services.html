@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Bancaires - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+            --color-bleu-btn: #3498db;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--color-noir-profond); color: var(--color-blanc-pur); margin: 0; padding: 0; }
+        .navbar { background-color: var(--color-gris-fonce); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--color-orange-cuivre); }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 1200px; margin: 50px auto; padding: 30px; }
+        h2 { color: var(--color-orange-cuivre); border-bottom: 2px solid var(--color-gris-fonce); padding-bottom: 10px; margin-bottom: 30px; }
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 10px 15px; transition: color 0.3s; border-radius: 5px; }
+        .nav-link:hover, .nav-link.active { color: var(--color-orange-cuivre); background-color: #2b2b2b; }
+        
+        /* Styles spécifiques */
+        .service-grid { display: flex; gap: 30px; margin-bottom: 40px; }
+        .service-box { 
+            background-color: var(--color-gris-fonce); 
+            padding: 25px; 
+            border-radius: 8px; 
+            flex: 1;
+        }
+        .service-box h3 { color: var(--color-blanc-pur); border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 0; }
+        .map-placeholder { 
+            height: 300px; 
+            background-color: #333; 
+            color: var(--color-gris-moyen); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 5px; 
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .form-group label { display: block; margin-bottom: 5px; color: var(--color-gris-moyen); }
+        .form-group input, .form-group select { 
+            width: 100%; padding: 10px; margin-bottom: 15px; 
+            background-color: #2b2b2b; color: var(--color-blanc-pur); 
+            border: 1px solid #333; border-radius: 5px; box-sizing: border-box; 
+        }
+        .btn-action { 
+            background-color: var(--color-orange-cuivre); color: var(--color-blanc-pur); 
+            padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; 
+            font-weight: bold; transition: background-color 0.3s; 
+        }
+        .btn-action:hover { background-color: #cc5400; }
+        
+        /* Simulateur */
+        .simulator-result { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background-color: #1a1a1a; 
+            border-left: 4px solid var(--color-vert-succes); 
+            border-radius: 4px; 
+        }
+        .simulator-result p { margin: 5px 0; color: var(--color-blanc-pur); }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+        <nav class="main-nav">
+            <a href="dashboard.html" class="nav-link ">Accueil</a>
+            <a href="comptes.html" class="nav-link ">Comptes</a>
+            <a href="transaction.html" class="nav-link">Transactions</a>
+            <a href="services.html" class="nav-link active">Services</a>
+            <a href="profil.html" class="nav-link">Profil</a>
+    </nav>
+        <div class="user-info"><span class="notification-icon" id="notification-btn"><i class="fas fa-bell"></i><span class="notification-badge" id="unread-count"></span></span></div>
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-concierge-bell"></i> Services & Outils</h2>
+
+        <div class="service-box" style="margin-bottom: 40px;">
+            <h3><i class="fas fa-map-marker-alt"></i> Agences et Distributeurs (ATM)</h3>
+            <div class="map-placeholder">
+                [Image de carte avec géolocalisation]
+                Carte interactive non fonctionnelle (API Google Maps/OpenStreetMap requise)
+            </div>
+            <p style="color: var(--color-vert-succes);">3 Agences et 5 Distributeurs trouvés à moins de 5 km.</p>
+        </div>
+
+        <div class="service-grid">
+            <div class="service-box">
+                <h3><i class="fas fa-calculator"></i> Calculateur de Prêt Immobilier</h3>
+                <div class="form-group"><label>Montant du Prêt (€)</label><input type="number" value="150000" min="1000"></div>
+                <div class="form-group"><label>Durée (années)</label><input type="number" value="20" min="1" max="30"></div>
+                <div class="form-group"><label>Taux Annuel Brut (%)</label><input type="number" value="3.5" step="0.01"></div>
+                <button class="btn-action"><i class="fas fa-percent"></i> Simuler</button>
+                <div class="simulator-result">
+                    <p><strong>Résultat de la Simulation :</strong></p>
+                    <p>Mensualité Estimée : <strong>866,90 €</strong></p>
+                    <p>Coût Total du Crédit : <strong>58 058 €</strong></p>
+                </div>
+            </div>
+
+            <div class="service-box">
+                <h3><i class="fas fa-calendar-check"></i> Prendre Rendez-vous</h3>
+                <form>
+                    <div class="form-group"><label>Motif</label><select><option>Conseil en investissement</option><option>Ouverture de compte</option><option>Problème technique</option></select></div>
+                    <div class="form-group"><label>Date Préférée</label><input type="date"></div>
+                    <div class="form-group"><label>Heure Préférée</label><input type="time" value="10:00"></div>
+                    <button class="btn-action"><i class="fas fa-paper-plane"></i> Demander RDV</button>
+                </form>
+                
+                <h3 style="margin-top: 30px;">Autres Liens Utiles</h3>
+                <p><a href="cartes.html" style="color: var(--color-orange-cuivre);"><i class="fas fa-credit-card"></i> Gérer mes cartes</a></p>
+                <p><a href="investissements.html" style="color: var(--color-orange-cuivre);"><i class="fas fa-chart-line"></i> Conseils Investissements</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

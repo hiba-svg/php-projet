@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Client - Banque Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+        <div>
+            <nav class="main-nav">
+            <a href="dashboard.html" class="nav-link active">Accueil</a>
+            <a href="comptes.html" class="nav-link ">Comptes</a>
+            <a href="transaction.html" class="nav-link">Transactions</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="profil.html" class="nav-link">Profil</a>
+    </nav>
+        </div>
+        <span class="notification-icon" id="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge" id="unread-count"></span> 
+        </span>
+    </header>
+
+    <div class="dashboard-container">
+        
+        <main class="main-content">
+            
+            <section class="account-summary">
+                <h2> Aperçu des Comptes</h2>
+                <div class="account-cards">
+                    <div class="card account-card current">
+                        <div class="card-header">
+                            <h3>Compte Courant Principal</h3>
+                            <span class="account-type">Courant</span>
+                        </div>
+                        <p class="account-number">**** **** 4567</p>
+                        <div class="balance">
+                            <span class="label">Solde Disponible</span>
+                            <span class="amount">5 450,50 €</span>
+                        </div>
+                    </div>
+
+                    <div class="card account-card saving">
+                        <div class="card-header">
+                            <h3>Compte Réserve</h3>
+                            <span class="account-type">Épargne</span>
+                        </div>
+                        <p class="account-number">**** **** 1234</p>
+                        <div class="balance">
+                            <span class="label">Solde Disponible</span>
+                            <span class="amount">12 890,00 €</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="recent-transactions">
+                <h2> Dernières Opérations</h2>
+                <ul class="transaction-list">
+                    <li class="transaction-item">
+                        <span class="transaction-date">15/12</span>
+                        <span class="transaction-label">Achat Supermarché</span>
+                        <span class="transaction-amount debit">- 45,90 €</span>
+                    </li>
+                    <li class="transaction-item">
+                        <span class="transaction-date">15/12</span>
+                        <span class="transaction-label">Virement Entrant (Salaire)</span>
+                        <span class="transaction-amount credit">+ 2 500,00 €</span>
+                    </li>
+                    <li class="transaction-item">
+                        <span class="transaction-date">14/12</span>
+                        <span class="transaction-label">Abonnement Streaming</span>
+                        <span class="transaction-amount debit">- 12,99 €</span>
+                    </li>
+                    <li class="transaction-item more"><a href="historique.html">Voir toutes les opérations</a></li>
+                </ul>
+            </section>
+
+        </main>
+
+        <aside class="sidebar">
+            
+            <section class="quick-actions">
+    <h2>Actions Rapides</h2>
+    <div class="action-buttons">
+        <a href="virement.html" class="action-btn primary-btn"><i class="fas fa-exchange-alt"></i> Faire un Virement</a>
+        
+        <a href="facture.html" class="action-btn"><i class="fas fa-file-invoice-dollar"></i> Payer une Facture</a>
+        
+        <a href="cartes.html" class="action-btn"><i class="fas fa-credit-card"></i> Gestion des Cartes</a>
+        
+        <a href="investissements.html" class="action-btn"><i class="fas fa-chart-line"></i> Voir les Investissements</a>
+    </div>
+</section>
+            
+            <section class="notifications-panel" id="notifications-panel">
+                        <a href="notifications.html" class="nav-link"><h1 class="logo"> <h2> Notifications</h2></h1></a> 
+               
+                <div class="notification alert">
+                    <i class="fas fa-exclamation-triangle"></i> Solde Courant inférieur à 100 €.
+                </div>
+                <div class="notification success">
+                    <i class="fas fa-check-circle"></i> Virement de 500 € effectué avec succès.
+                </div>
+            </section>
+            
+            <section class="graph-summary">
+    <h2> Résumé des Dépenses</h2>
+    
+    <div class="expense-viz">
+        <div class="chart-wrapper">
+            <div class="doughnut-chart">
+                <span class="center-text">
+                    Total Dépensé: <br>
+                    <span class="total-amount">1 250 €</span>
+                </span>
+            </div>
+        </div>
+        
+        <ul class="chart-legend">
+            <li><span class="legend-color" style="background-color: #d95b00;"></span> Alimentation (35%)</li>
+            <li><span class="legend-color" style="background-color: #a0522d;"></span> Logement/Loyer (30%)</li>
+            <li><span class="legend-color" style="background-color: #28a745;"></span> Transport (15%)</li>
+            <li><span class="legend-color" style="background-color: #dc3545;"></span> Loisirs (10%)</li>
+            <li><span class="legend-color" style="background-color: #999;"></span> Autres (10%)</li>
+        </ul>
+        
+    </div>
+</section>
+
+        </aside>
+    </div>
+    <script src="dashboard.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

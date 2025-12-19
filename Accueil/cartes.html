@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Cartes - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS COHÉRENT POUR L'INTERFACE */
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--color-noir-profond); 
+            color: var(--color-blanc-pur); 
+            margin: 0; 
+            padding: 0; 
+        }
+        /* Barre de navigation */
+        .navbar { 
+            background-color: var(--color-gris-fonce); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--color-orange-cuivre); 
+        }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 800px; margin: 50px auto; padding: 30px; }
+        h2 { 
+            color: var(--color-orange-cuivre); 
+            border-bottom: 2px solid var(--color-gris-fonce); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+        }
+        /* Conteneur principal */
+        .form-container { 
+            background-color: var(--color-gris-fonce); 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        /* Style des titres secondaires */
+        .form-container h3 {
+            color: var(--color-blanc-pur);
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+            margin-top: 0;
+            font-weight: 500;
+        }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--color-gris-moyen); font-weight: bold; }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        /* Boutons d'action */
+        .action-button {
+            color: var(--color-blanc-pur);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .action-button i { margin-right: 8px; }
+        .action-button:hover { opacity: 0.8; }
+
+        /* Couleurs des boutons d'action */
+        .btn-lock { background: var(--color-rouge-alerte); }
+        .btn-limit { background: #3498db; } /* Bleu pour les paramètres */
+        .btn-replace { background: var(--color-orange-cuivre); }
+
+        /* Style des liens de navigation */
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 0 10px; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-orange-cuivre); }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="dashboard.html" class="nav-link"><h1 class="logo">BankPro</h1></a> 
+        
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-credit-card"></i> Gestion des Cartes</h2>
+        
+        <div class="form-container">
+            <h3>Ma Carte Visa Premier</h3>
+            <p style="color: var(--color-gris-moyen); margin-bottom: 20px;">
+                Statut: <span style="color: var(--color-vert-succes); font-weight: bold;">Active</span> | Expiration: 10/2028 | **** 8888
+            </p>
+
+            <div style="display: flex; justify-content: space-around; margin-bottom: 30px;">
+                <button class="action-button btn-lock"><i class="fas fa-lock"></i> Bloquer Temporairement</button>
+                <button class="action-button btn-limit"><i class="fas fa-sliders-h"></i> Modifier les Limites</button>
+                <button class="action-button btn-replace"><i class="fas fa-exchange-alt"></i> Remplacement</button>
+            </div>
+
+            <div class="form-group">
+                <label for="limit-achat">Limite d'Achat Mensuelle</label>
+                <input type="text" id="limit-achat" value="3 000,00 €" readonly>
+            </div>
+            <div class="form-group">
+                <label for="limit-retrait">Limite de Retrait Hebdomadaire</label>
+                <input type="text" id="limit-retrait" value="500,00 €" readonly>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

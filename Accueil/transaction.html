@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opérations Financières - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS COHÉRENT POUR L'INTERFACE (Reprise des couleurs principales) */
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--color-noir-profond); 
+            color: var(--color-blanc-pur); 
+            margin: 0; 
+            padding: 0; 
+        }
+        /* Barre de navigation et base de page (identique) */
+        .navbar { 
+            background-color: var(--color-gris-fonce); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--color-orange-cuivre); 
+        }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 900px; margin: 50px auto; padding: 30px; }
+        h2 { 
+            color: var(--color-orange-cuivre); 
+            border-bottom: 2px solid var(--color-gris-fonce); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+        }
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 10px 15px; transition: color 0.3s; border-radius: 5px; }
+        .nav-link:hover, .nav-link.active { color: var(--color-orange-cuivre); background-color: #2b2b2b; }
+        
+        /* Conteneur principal */
+        .form-container { 
+            background-color: var(--color-gris-fonce); 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* --- ONGLET DE NAVIGATION (Tabs) --- */
+        .tab-nav {
+            display: flex;
+            border-bottom: 2px solid #333;
+            margin-bottom: 20px;
+        }
+        .tab-nav button {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: var(--color-gris-moyen);
+            transition: color 0.3s, border-bottom 0.3s;
+            margin-bottom: -2px; /* Pour masquer la ligne de séparation */
+            font-weight: 600;
+        }
+        .tab-nav button:hover {
+            color: var(--color-blanc-pur);
+        }
+        .tab-nav button.active-tab {
+            color: var(--color-orange-cuivre);
+            border-bottom: 2px solid var(--color-orange-cuivre);
+        }
+        
+        /* Contenu des onglets */
+        .tab-content > div {
+            display: none;
+        }
+        .tab-content > div.active-tab-content {
+            display: block;
+        }
+
+        /* --- STYLES DES FORMULAIRES --- */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--color-gris-moyen); font-weight: bold; }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn-validate {
+            background-color: var(--color-orange-cuivre);
+            color: var(--color-blanc-pur);
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn-validate:hover { background-color: #cc5400; }
+        .btn-cancel {
+            background-color: #333;
+            color: var(--color-blanc-pur);
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s;
+        }
+        .btn-cancel:hover { background-color: #444; }
+        
+        .beneficiary-management {
+            padding: 10px;
+            background-color: #1a1a1a;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: var(--color-gris-moyen);
+            text-align: right;
+        }
+        .beneficiary-management a {
+            color: var(--color-orange-cuivre);
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+        
+        <nav class="main-nav">
+            <a href="dashboard.html" class="nav-link ">Accueil</a>
+            <a href="comptes.html" class="nav-link ">Comptes</a>
+            <a href="transaction.html" class="nav-link active">Transactions</a>
+            <a href="services.html" class="nav-link">Services</a>
+            <a href="profil.html" class="nav-link">Profil</a>
+    </nav>
+        
+        <div class="user-info">
+            <span class="notification-icon" id="notification-btn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="unread-count"></span> 
+            </span>
+        </div>
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-money-check-alt"></i> Opérations Financières</h2>
+        
+        <div class="form-container">
+            
+            <div class="tab-nav">
+                <button class="active-tab" onclick="showTab('virement')"><i class="fas fa-exchange-alt"></i> Virement</button>
+                <button onclick="showTab('facture')"><i class="fas fa-file-invoice-dollar"></i> Payer Facture</button>
+                <button onclick="showTab('prelevement')"><i class="fas fa-credit-card"></i> Prélèvements</button>
+            </div>
+            
+            <div class="tab-content">
+                
+                <div id="virement" class="active-tab-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="compte-source">Compte Source</label>
+                            <select id="compte-source">
+                                <option>Compte Courant Principal (4 550,50 €)</option>
+                                <option>Compte Épargne Livret A (12 890,00 €)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="compte-destinataire">Compte Destinataire / Bénéficiaire</label>
+                            <select id="compte-destinataire">
+                                <option>-- Sélectionner un bénéficiaire existant --</option>
+                                <option>Mon Compte Épargne (Virement Interne)</option>
+                                <option>Jean Dupont - Banque Externe</option>
+                                <option>Nouveau Bénéficiaire</option>
+                            </select>
+                            <div class="beneficiary-management">
+                                Vous avez 5 bénéficiaires enregistrés.
+                                <a href="#">Ajouter/Gérer les Bénéficiaires</a>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="montant">Montant à Transférer (€)</label>
+                            <input type="number" id="montant" placeholder="0,00" min="0" step="0.01">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="motif">Motif / Référence</label>
+                            <input type="text" id="motif" placeholder="Ex: Remboursement, Loyer, Cadeau">
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn-cancel">Annuler</button>
+                            <button type="submit" class="btn-validate">Valider le Virement</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="facture">
+                     <form>
+                        <div class="form-group">
+                            <label for="compte-source-fact">Compte Source</label>
+                            <select id="compte-source-fact">
+                                <option>Compte Courant Principal (4 550,50 €)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ref-facture">Référence de la Facture / Fournisseur</label>
+                            <input type="text" id="ref-facture" placeholder="Saisir la référence unique (ex: 789456123)">
+                        </div>
+                         
+                        <div class="form-group">
+                            <label for="montant-facture">Montant à Payer (€)</label>
+                            <input type="number" id="montant-facture" placeholder="0,00" min="0" step="0.01">
+                        </div>
+                        
+                        <div class="button-group">
+                            <button type="button" class="btn-cancel">Annuler</button>
+                            <button type="submit" class="btn-validate">Payer la Facture</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="prelevement">
+                    <p style="color: var(--color-gris-moyen);">
+                        Gérez ici les mandats de prélèvement automatique actifs. Vous pouvez visualiser le détail de chaque mandat et, si nécessaire, les révoquer.
+                    </p>
+                    <table style="width: 100%; color: var(--color-blanc-pur); margin-top: 20px; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background-color: #1a1a1a;">
+                                <th style="padding: 10px; border-bottom: 1px solid #333;">Créancier</th>
+                                <th style="padding: 10px; border-bottom: 1px solid #333;">Dernier Montant</th>
+                                <th style="padding: 10px; border-bottom: 1px solid #333;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid #333;">Fournisseur Électricité</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #333;">85,50 €</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #333;"><button class="action-btn btn-validate" style="padding: 5px 10px; background-color: var(--color-rouge-alerte);">Révoquer</button></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid #333;">Compagnie Télécom</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #333;">49,99 €</td>
+                                <td style="padding: 10px; border-bottom: 1px solid #333;"><button class="action-btn btn-validate" style="padding: 5px 10px; background-color: var(--color-rouge-alerte);">Révoquer</button></td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+                <a href="historique_transactions.html" class="nav-link"><h1 class="logo">Historique de transaction</h1></a> 
+
+    </div>
+    
+    <script>
+        // Ce script minimal gère l'affichage des onglets
+        function showTab(tabId) {
+            // Masquer tous les contenus
+            document.querySelectorAll('.tab-content > div').forEach(content => {
+                content.classList.remove('active-tab-content');
+            });
+            // Désactiver tous les boutons
+            document.querySelectorAll('.tab-nav button').forEach(button => {
+                button.classList.remove('active-tab');
+            });
+            
+            // Afficher le contenu de l'onglet cliqué
+            document.getElementById(tabId).classList.add('active-tab-content');
+            
+            // Activer le bouton cliqué
+            event.currentTarget.classList.add('active-tab');
+        }
+        const virementForm = document.getElementById('virement-form'); // Assurez-vous d'ajouter id="virement-form" à votre balise <form>
+
+    if (virementForm) {
+        virementForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Empêche l'envoi réel du formulaire pour l'instant
+            
+            // Simulation : Affichage d'une alerte de succès et proposition de redirection
+            const confirmation = confirm("Transaction effectuée avec succès !\nVoulez-vous consulter l'historique de vos opérations ?");
+            
+            if (confirmation) {
+                window.location.href = 'historique.html'; // Redirection
+            } else {
+                // Reste sur la page transaction
+                alert("Opération terminée. Vous restez sur la page de transactions.");
+            }
+        });
+    }
+
+    // Gestion des onglets (fonction showTab)
+    function showTab(tabId) {
+        // ... (votre code showTab existant) ...
+        document.querySelectorAll('.tab-content > div').forEach(content => {
+            content.classList.remove('active-tab-content');
+        });
+        document.querySelectorAll('.tab-nav button').forEach(button => {
+            button.classList.remove('active-tab');
+        });
+        
+        document.getElementById(tabId).classList.add('active-tab-content');
+        event.currentTarget.classList.add('active-tab');
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des Opérations - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS COHÉRENT POUR L'INTERFACE (Reprise des couleurs principales) */
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+            --color-vert-succes: #28a745;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--color-noir-profond); 
+            color: var(--color-blanc-pur); 
+            margin: 0; 
+            padding: 0; 
+        }
+        /* Barre de navigation (Identique aux autres pages) */
+        .navbar { 
+            background-color: var(--color-gris-fonce); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--color-orange-cuivre); 
+        }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 1100px; margin: 50px auto; padding: 30px; }
+        h2 { 
+            color: var(--color-orange-cuivre); 
+            border-bottom: 2px solid var(--color-gris-fonce); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+        }
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 0 10px; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-orange-cuivre); }
+
+        /* --- FILTRES ET RECHERCHE --- */
+        .filter-bar {
+            background-color: var(--color-gris-fonce);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .filter-group {
+            flex: 1;
+        }
+        .filter-bar input, .filter-bar select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+            box-sizing: border-box;
+        }
+        .search-btn {
+            background-color: var(--color-orange-cuivre);
+            color: var(--color-blanc-pur);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .search-btn:hover { background-color: #cc5400; }
+
+        /* --- TABLEAU DES TRANSACTIONS --- */
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .transaction-table th, .transaction-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        .transaction-table th {
+            color: var(--color-gris-moyen);
+            border-bottom: 2px solid var(--color-gris-fonce);
+            font-weight: 600;
+            background-color: #1a1a1a;
+        }
+        .transaction-table td {
+            font-size: 0.95em;
+        }
+        .amount.debit {
+            color: var(--color-rouge-alerte);
+            font-weight: bold;
+        }
+        .amount.credit {
+            color: var(--color-vert-succes);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <h1 class="logo"><a href="dashboard.html" class="nav-link logo">BankPro</a></h1>
+        
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-list-ul"></i> Historique Complet des Opérations</h2>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label style="color: var(--color-gris-moyen);">Période</label>
+                <select>
+                    <option>Les 30 derniers jours</option>
+                    <option>Ce mois</option>
+                    <option>2025</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label style="color: var(--color-gris-moyen);">Type</label>
+                <select>
+                    <option>Tous</option>
+                    <option>Débit (Dépenses)</option>
+                    <option>Crédit (Revenus)</option>
+                    <option>Virements</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label style="color: var(--color-gris-moyen);">Recherche (Mot-clé)</label>
+                <input type="text" placeholder="Ex: Amazon, Loyer, Nom">
+            </div>
+            <button class="search-btn"><i class="fas fa-search"></i> Filtrer</button>
+        </div>
+
+        <table class="transaction-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Libellé</th>
+                    <th>Montant</th>
+                    <th>Compte</th>
+                    <th>Référence</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>15/12/2025</td>
+                    <td>Achat Supermarché</td>
+                    <td class="amount debit">- 45,90 €</td>
+                    <td>Courant</td>
+                    <td>TRF-1234</td>
+                </tr>
+                <tr>
+                    <td>15/12/2025</td>
+                    <td>Virement Entrant (Salaire)</td>
+                    <td class="amount credit">+ 2 500,00 €</td>
+                    <td>Courant</td>
+                    <td>REF-7890</td>
+                </tr>
+                <tr>
+                    <td>14/12/2025</td>
+                    <td>Abonnement Streaming</td>
+                    <td class="amount debit">- 12,99 €</td>
+                    <td>Courant</td>
+                    <td>SUB-1122</td>
+                </tr>
+                <tr>
+                    <td>12/12/2025</td>
+                    <td>Remboursement Virement</td>
+                    <td class="amount credit">+ 150,00 €</td>
+                    <td>Épargne</td>
+                    <td>TRF-9988</td>
+                </tr>
+                 <tr>
+                    <td>10/12/2025</td>
+                    <td>Retrait Distributeur</td>
+                    <td class="amount debit">- 200,00 €</td>
+                    <td>Courant</td>
+                    <td>ATM-3344</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

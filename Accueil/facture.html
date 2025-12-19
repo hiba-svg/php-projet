@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payer une Facture - BankPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS COHÉRENT POUR L'INTERFACE */
+        :root {
+            --color-orange-cuivre: #d95b00;
+            --color-noir-profond: #121212;
+            --color-gris-fonce: #202020;
+            --color-blanc-pur: #ffffff;
+            --color-gris-moyen: #999;
+            --color-rouge-alerte: #dc3545;
+        }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background-color: var(--color-noir-profond); 
+            color: var(--color-blanc-pur); 
+            margin: 0; 
+            padding: 0; 
+        }
+        /* Barre de navigation */
+        .navbar { 
+            background-color: var(--color-gris-fonce); 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--color-orange-cuivre); 
+        }
+        .logo { color: var(--color-orange-cuivre); font-size: 1.8em; margin: 0; }
+        .page-content { max-width: 800px; margin: 50px auto; padding: 30px; }
+        h2 { 
+            color: var(--color-orange-cuivre); 
+            border-bottom: 2px solid var(--color-gris-fonce); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+        }
+        /* Conteneur principal */
+        .form-container { 
+            background-color: var(--color-gris-fonce); 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+        /* Style des titres secondaires */
+        .form-container h3 {
+            color: var(--color-blanc-pur);
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+            margin-top: 0;
+            font-weight: 500;
+        }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--color-gris-moyen); font-weight: bold; }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #2b2b2b;
+            color: var(--color-blanc-pur);
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        /* Bouton principal */
+        .submit-btn {
+            background-color: var(--color-orange-cuivre);
+            color: var(--color-blanc-pur);
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            float: right;
+            margin-top: 20px;
+        }
+        .submit-btn:hover { background-color: #cc5400; }
+        /* Style des liens de navigation */
+        .nav-link { color: var(--color-gris-moyen); text-decoration: none; padding: 0 10px; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-orange-cuivre); }
+
+        /* Styles spécifiques à la liste de factures */
+        .facture-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10px;
+            border-bottom: 1px solid #333;
+        }
+        .facture-item:last-of-type {
+            border-bottom: none;
+        }
+        .facture-item-info {
+            flex-grow: 1;
+        }
+        .facture-montant {
+            font-weight: bold;
+            color: var(--color-rouge-alerte); /* Les factures à payer sont souvent en rouge */
+        }
+        .pay-btn {
+            background: var(--color-orange-cuivre); 
+            color: var(--color-blanc-pur); 
+            border: none; 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .pay-btn:hover {
+            background-color: #cc5400;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <a href="dashboard.html" class="nav-link"><h1 class="logo">BankPro</h1></a> 
+       
+    </header>
+
+    <div class="page-content">
+        <h2><i class="fas fa-file-invoice-dollar"></i> Paiement de Factures</h2>
+        
+        <div class="form-container">
+            <h3>Factures en attente (2)</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li class="facture-item">
+                    <div class="facture-item-info">
+                        Électricité - <span class="facture-montant">85,50 €</span> <br>
+                        <span style="font-size: 0.9em; color: var(--color-gris-moyen);">Échéance: 20/12/2025</span>
+                    </div>
+                    <button class="pay-btn">Payer</button>
+                </li>
+                <li class="facture-item">
+                    <div class="facture-item-info">
+                        Télécom - <span class="facture-montant">49,99 €</span> <br>
+                        <span style="font-size: 0.9em; color: var(--color-gris-moyen);">Échéance: 25/12/2025</span>
+                    </div>
+                    <button class="pay-btn">Payer</button>
+                </li>
+            </ul>
+            
+            <h3 style="margin-top: 40px;">Nouveau Paiement par Référence</h3>
+            <form>
+                <div class="form-group">
+                    <label for="ref-facture">Numéro de Référence de la Facture</label>
+                    <input type="text" id="ref-facture" placeholder="Saisir la référence unique du fournisseur">
+                </div>
+                <button type="submit" class="submit-btn">Rechercher & Payer</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

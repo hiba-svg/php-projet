@@ -1,0 +1,471 @@
+/* Définition des variables de couleur basées sur la palette */
+:root {
+    --color-orange-cuivre: #d95b00; /* Boutons, liens, accent */
+    --color-noir-profond: #121212; /* Fond principal */
+    --color-gris-fonce: #202020; /* Cartes, conteneurs */
+    --color-brun-chaud: #a0522d; /* Bordure secondaire, séparateur */
+    --color-blanc-pur: #ffffff; /* Texte primaire */
+    --color-gris-moyen: #999; /* Texte secondaire, date */
+    --color-rouge-alerte: #dc3545; /* Débit, alerte */
+    --color-vert-succes: #28a745; /* Crédit, succès */
+}
+
+/* Style de base et fond */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-noir-profond);
+    color: var(--color-blanc-pur);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* --- Barre de Navigation (Header) --- */
+.navbar {
+    background-color: var(--color-gris-fonce);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-orange-cuivre);
+}
+
+.logo {
+    color: var(--color-orange-cuivre);
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.notification-icon {
+    font-size: 1.2em;
+    margin-right: 20px;
+    cursor: pointer;
+    color: var(--color-blanc-pur);
+    transition: color 0.3s;
+}
+
+.notification-icon:hover {
+    color: var(--color-orange-cuivre);
+}
+
+.user-profile {
+    color: var(--color-gris-moyen);
+}
+
+/* --- Disposition du Dashboard --- */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Main content large, sidebar narrow */
+    gap: 30px;
+    padding: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h2 {
+    border-bottom: 2px solid var(--color-gris-fonce); /* Subtil sur fond noir */
+    padding-bottom: 10px;
+    margin-top: 0;
+    color: var(--color-orange-cuivre); /* Accentuation des titres */
+}
+
+.card {
+    background-color: var(--color-gris-fonce);
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Ombre pour l'effet premium */
+}
+
+/* --- Section Aperçu des Comptes --- */
+.account-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.account-card {
+    flex: 1;
+    border-left: 5px solid transparent; /* Pour la couleur d'accent */
+}
+
+.account-card.current {
+    border-left-color: var(--color-orange-cuivre); /* Orange Cuivré pour Courant */
+}
+
+.account-card.saving {
+    border-left-color: var(--color-brun-chaud); /* Brun Chaud pour Épargne */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.account-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.account-type {
+    background-color: rgba(217, 91, 0, 0.2); /* Orange très transparent */
+    color: var(--color-orange-cuivre);
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+.account-number {
+    color: var(--color-gris-moyen);
+    font-size: 0.9em;
+}
+
+.balance {
+    margin-top: 20px;
+}
+
+.balance .label {
+    display: block;
+    color: var(--color-gris-moyen);
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+.balance .amount {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: var(--color-blanc-pur);
+}
+
+/* --- Section Dernières Opérations --- */
+.transaction-list {
+    list-style: none;
+    padding: 0;
+}
+
+.transaction-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--color-gris-fonce); /* Ligne de séparation subtile */
+    align-items: center;
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-date {
+    color: var(--color-gris-moyen);
+    font-size: 0.85em;
+}
+
+.transaction-label {
+    font-weight: 500;
+}
+
+.transaction-amount {
+    text-align: right;
+    font-weight: bold;
+}
+
+.transaction-amount.debit {
+    color: var(--color-rouge-alerte);
+}
+
+.transaction-amount.credit {
+    color: var(--color-vert-succes);
+}
+
+.transaction-item.more a {
+    color: var(--color-orange-cuivre);
+    text-decoration: none;
+    grid-column: 1 / span 3;
+    text-align: center;
+    padding-top: 10px;
+    font-weight: 500;
+}
+
+/* --- Section Actions Rapides --- */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.action-btn {
+    background-color: var(--color-gris-fonce);
+    color: var(--color-blanc-pur);
+    border: 1px solid var(--color-gris-fonce);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    text-align: left;
+}
+
+.action-btn i {
+    margin-right: 10px;
+    color: var(--color-orange-cuivre); /* Icônes en Orange Cuivré */
+}
+
+.action-btn:hover {
+    background-color: #2b2b2b;
+    border-color: var(--color-orange-cuivre);
+}
+
+.action-btn.primary-btn {
+    background-color: var(--color-orange-cuivre);
+    color: var(--color-blanc-pur);
+    font-weight: bold;
+    border-color: var(--color-orange-cuivre);
+}
+
+.action-btn.primary-btn i {
+    color: var(--color-blanc-pur); /* Icônes blanches sur fond orange */
+}
+
+.action-btn.primary-btn:hover {
+    background-color: #cc5400; /* Orange légèrement plus foncé au survol */
+}
+
+/* --- Notifications et Graphique --- */
+.notifications-panel {
+    margin-bottom: 30px;
+    padding-top: 15px;
+}
+
+.notification {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+}
+
+.notification i {
+    margin-right: 10px;
+}
+
+.notification.alert {
+    background-color: rgba(220, 53, 69, 0.15); /* Rouge transparent */
+    border-left: 5px solid var(--color-rouge-alerte);
+    color: var(--color-rouge-alerte);
+}
+
+.notification.success {
+    background-color: rgba(40, 167, 69, 0.15); /* Vert transparent */
+    border-left: 5px solid var(--color-vert-succes);
+    color: var(--color-vert-succes);
+}
+
+.graph-placeholder {
+    height: 200px;
+    background-color: var(--color-gris-fonce);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-gris-moyen);
+    font-size: 0.9em;
+}
+
+/* Responsiveness de base (pour les petits écrans) */
+@media (max-width: 1024px) {
+    .dashboard-container {
+        grid-template-columns: 1fr; /* Empilement sur une seule colonne */
+    }
+    .account-cards {
+        flex-direction: column;
+    }
+}
+/* --- Styles pour la Visualisation des Dépenses (Doughnut Chart Simulé) --- */
+
+.expense-viz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--color-gris-fonce); /* Fond des conteneurs */
+    border-radius: 8px;
+}
+
+.chart-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+}
+
+/* Le Graphique en Anneau (Simulé avec des background-images ou conic-gradient) */
+.doughnut-chart {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    /* Utilisation de conic-gradient pour simuler la répartition des dépenses */
+    background: conic-gradient(
+        /* Alimentation (35%) - Orange Cuivré */
+        var(--color-orange-cuivre) 0%, var(--color-orange-cuivre) 35%,
+        /* Logement (30%) - Brun Chaud */
+        var(--color-brun-chaud) 35%, var(--color-brun-chaud) 65%,
+        /* Transport (15%) - Vert Succès (utilisé ici comme couleur neutre) */
+        var(--color-vert-succes) 65%, var(--color-vert-succes) 80%,
+        /* Loisirs (10%) - Rouge Alerte (utilisé ici comme couleur neutre) */
+        var(--color-rouge-alerte) 80%, var(--color-rouge-alerte) 90%,
+        /* Autres (10%) - Gris Moyen */
+        var(--color-gris-moyen) 90%, var(--color-gris-moyen) 100%
+    );
+}
+
+/* Le trou central */
+.doughnut-chart::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: var(--color-gris-fonce);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 0.8em;
+    line-height: 1.3;
+    z-index: 10;
+}
+
+.total-amount {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--color-blanc-pur);
+}
+
+/* Légende du graphique */
+.chart-legend {
+    list-style: none;
+    padding: 0;
+    font-size: 0.9em;
+    width: 100%;
+}
+
+.chart-legend li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color: var(--color-gris-moyen);
+}
+
+.legend-color {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+/* --- Style pour le Badge de Notification --- */
+
+.notification-icon {
+    position: relative; /* Nécessaire pour positionner le badge */
+    font-size: 1.2em;
+    margin-right: 20px;
+    cursor: pointer;
+    color: var(--color-blanc-pur);
+    transition: color 0.3s;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: 15px; /* Ajuster la position par rapport à la cloche */
+    background-color: var(--color-rouge-alerte); /* Utiliser le rouge pour l'urgence */
+    color: var(--color-blanc-pur);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.7em;
+    font-weight: bold;
+    /* Rendre invisible si aucun décompte (sera géré par JS dans un vrai projet) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 15px; 
+    height: 15px;
+}
+
+/* --- Masquer le panneau par défaut (Il sera affiché par JS) --- */
+
+#notifications-panel {
+    /* Cachez-le par défaut. Le JS va changer 'display' ou ajouter une classe 'visible' */
+    display: none; 
+    
+    /* Si vous voulez une animation, vous pouvez utiliser la propriété 'opacity' et 'transform' à la place de 'display: none' */
+}
+
+/* Classe que le JavaScript va ajouter pour afficher le panneau */
+#notifications-panel.is-visible {
+    display: block;
+}
+
+/* --- Mise à jour de la Navbar pour le centrage des éléments --- */
+.navbar { 
+    background-color: var(--color-gris-fonce); 
+    padding: 15px 30px; 
+    /* Utiliser flexbox pour aligner et répartir les trois blocs */
+    display: flex; 
+    /* Espacer le Logo, la Navigation et les Infos Utilisateur */
+    justify-content: space-between; 
+    align-items: center; 
+    border-bottom: 2px solid var(--color-orange-cuivre); 
+}
+
+/* --- Style pour le bloc de navigation principal --- */
+.main-nav {
+    /* Permet au bloc de navigation de prendre plus de place au centre */
+    flex-grow: 1; 
+    text-align: center; /* Centre les liens dans l'espace disponible */
+}
+
+/* Style des liens de navigation */
+.main-nav .nav-link { 
+    color: var(--color-gris-moyen); 
+    text-decoration: none; 
+    padding: 10px 15px; /* Plus d'espace autour des liens */
+    margin: 0 5px; /* Petit espace entre les liens */
+    transition: color 0.3s, background-color 0.3s; 
+    border-radius: 5px;
+}
+
+.main-nav .nav-link:hover { 
+    color: var(--color-orange-cuivre); 
+    background-color: #2b2b2b; /* Petit effet de fond au survol */
+}
+
+/* Style spécifique pour la page active (si l'on implémente la logique d'état) */
+.main-nav .nav-link.active {
+    color: var(--color-orange-cuivre);
+    border-bottom: 2px solid var(--color-orange-cuivre);
+    background-color: #2b2b2b;
+}
+
+/* --- Ajustement du bloc utilisateur pour le positionnement --- */
+.user-info {
+    display: flex;
+    align-items: center;
+    /* Assurez-vous qu'il ne soit pas coupé */
+    min-width: 180px; 
+    justify-content: flex-end; /* Pousse les éléments à droite */
+}
